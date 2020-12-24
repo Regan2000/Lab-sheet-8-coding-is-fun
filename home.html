@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>PROGRAMMING IS FUN!</title>
+    <link rel="stylesheet" href="./FavoriteLanguage.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+</head>
+
+
+<body onload="pageloaded()">
+
+    <div class="banner-wrap">
+        <img src="./Image/coding is Fun.png" alt="CodingisFunBanner" style="width:350px;">
+    </div>
+
+    <div class="navbar">
+        <div class="navlink">
+            <a class="link" href="home.html">Home</a>
+            <a class="link" href="login.html">Login</a>
+            <a class="link" href="register.html">Register</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="leftcolumn">
+            <input type="text" id="searchbox" name="searchbox" placeholder="Search"><br>
+            <p>
+            <input type="button" onclick="getQuote()" value="Random Quote" id="Random_quote" ><br>
+            </p>
+            <p id="qotd"></p>
+            <script>
+            function getQuote(){
+                fetch('https://api.quotable.io/random')
+                .then(response => response.json())
+                .then(data => {console.log(`${data.content} —${data.author}`)
+                document.getElementById("qotd").innerHTML = `${data.content} —${data.author}`})
+            }
+            </script>
+        </div>
+
+        <div class="rightcolumn">
+            <br>
+            <h2>Registration Form</h2>
+            <form id="registration" method="GET">
+                
+                <div class="name">
+                    
+                    <p style="display:inline">First name:</p>
+                    <input type="text" id="first_name" name="first_name"><br><br>
+
+                    <p style="display:inline; margin-left: 10px;"}>Last name:</p> 
+                    <input type="text" id="last_name" name="last_name"><br><br>
+                </div>
+
+                <p>Which operating system do you use?</p>
+                <div class="osOptions">
+                    <input type="radio" id="mac" name="OS" value="Mac" class="OSoptions">
+                    <label for="mac">Mac</label>
+                    <input type="radio" id="windows" name="OS" value="Windows" class="OSoptions">
+                    <label for="windows">Windows</label>
+                    <input type="radio" id="linux" name="OS" value="Linux" class="OSoptions">
+                    <label for="linux">Linux</label>
+                </div>
+
+                <br>
+                <div class="langOptions">
+                    <label for="programming_lang">What is your favourite programming language?</label>
+                    <select id="programming_lang" name="programming_lang">
+                        <option value="Java">Java</option>
+                        <option value="C++">C++</option>
+                        <option value="Python">Python</option>
+                        <option value="Kotlin">Kotlin</option>
+                    </select>
+                </div>
+                
+                <input type="button" onclick="myFunction()" value="Submit" id="Submit_button" style="margin-left: 10px;"><br>
+                
+                <p id="result"></p>
+
+                <script>
+                function pageloaded() {
+                    document.getElementById("Submit_button").disabled = true;
+                    document.getElementById("first_name").addEventListener("input", function() {
+                        document.getElementById("Submit_button").disabled = false;
+                    });
+                    
+                }
+                
+                function myFunction() {
+                    var ans1 = document.getElementById("first_name");
+                    var ans2 = document.getElementById("last_name");
+                    var ans4 = document.getElementById("programming_lang");
+                    
+                    var ans3;
+                    
+                    if(document.getElementById("mac").checked) {
+                        ans3 = "Mac";
+                    }
+                    else if(document.getElementById("windows").checked) {
+                        ans3 = "Windows";
+                    }
+                    else if(document.getElementById("linux").checked) {
+                        ans3 = "Linux";
+                    }
+                    
+                    document.getElementById("result").innerHTML = ans1.value+" "+ans2.value+" codes in "+ans4.options[ans4.selectedIndex].text+" on " + ans3;
+                
+                    
+                }
+                </script> 
+                
+            </form>
+            <br>
+        </div>
+    </div>
+</html>
